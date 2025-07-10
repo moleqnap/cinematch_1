@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { MovieCard } from './features/content/components/MovieCard';
 import { ProfileSection } from './features/profile/components/ProfileSection';
 import { RecommendationCard } from './features/recommendation/components/RecommendationCard';
