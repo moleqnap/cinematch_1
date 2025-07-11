@@ -33,8 +33,7 @@
       "@/services/*": ["src/services/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/types/*": ["src/types/*"]
-    },
-    "types": ["vite/client"]
+    }
   },
   "include": [
     "src/**/*.ts",
