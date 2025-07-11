@@ -468,14 +468,19 @@ const startServer = async () => {
   }
 };
 
-// Detect Netlify Functions environment
-if (process.env.NETLIFY) {
-  // Initialize database once for function cold start
+// When running inside Netlify Functions (or any serverless runtime), ensure the
+// Express app is exported so libraries like `serverless-http` can wrap it.
+// We also kick-off database initialization during the cold-start. The async
+// work is *not* awaited because Lambda will freeze the process until the first
+// request anyway.
+if (process.env.LAMBDA_TASK_ROOT || process.env.NETLIFY || process.env.AWS_EXECUTION_ENV) {
   initializeDatabase();
+}
 
-  // Export the Express app for serverless handler
-  module.exports = app;
-} else if (require.main === module) {
-  // Start the server normally when executed directly (local dev)
+// Always export the Express instance for external consumers (e.g. Netlify Function)
+module.exports = app;
+
+// If this file is executed directly via `node backend/index.js`, start the full server.
+if (require.main === module) {
   startServer();
 }
