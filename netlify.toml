@@ -4,7 +4,7 @@
   # Directory with the static site output (for Vite this is usually `dist`)
   publish  = "dist"
   # Source folder for Netlify Functions (uncomment if you convert the backend to serverless functions)
-  # functions = "netlify/functions"
+  functions = "netlify/functions"
 
 #───────────────
 # API Routing
@@ -16,19 +16,19 @@
 # Uncomment the block that matches your deployment strategy and delete the other.
 
 # --- Option 1: External backend (default) ---
-[[redirects]]
-  from = "/api/*"
-  # REPLACE `https://your-backend.example.com` with the live backend base URL
-  to   = "https://your-backend.example.com/api/:splat"
-  status = 200  # proxy
-  force  = true
+# [[redirects]]
+#   from = "/api/*"
+#   # REPLACE `https://your-backend.example.com` with the live backend base URL
+#   to   = "https://your-backend.example.com/api/:splat"
+#   status = 200  # proxy
+#   force  = true
 
 # --- Option 2: Backend inside Netlify Functions ---
-# [[redirects]]
-#   from   = "/api/*"
-#   to     = "/.netlify/functions/server/:splat"
-#   status = 200
-#   force  = true
+[[redirects]]
+  from   = "/api/*"
+  to     = "/.netlify/functions/server/:splat"
+  status = 200
+  force  = true
 
 #───────────────
 # Environment variables
